@@ -1,0 +1,21 @@
+{
+  "name": "My Hello Extension",
+  "description": "A simple Chrome extension demo",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["activeTab", "scripting", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "hello.html",
+    "default_icon": "images/cat.png"
+  }
+}
