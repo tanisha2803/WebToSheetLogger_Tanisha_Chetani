@@ -1,17 +1,88 @@
-📁 Repository Structure and Key Files
-manifest.json: Defines the extension's metadata, permissions, and the files it uses. This is a crucial file for any Chrome extension, specifying how the extension should behave.
-background.js: Contains background scripts that run independently of web pages. These scripts can handle events like browser startup, tab updates, and more.
-content.js: Injected into web pages, this script can manipulate the DOM, listen for events, or communicate with the background script.
-popup.js and hello.html: Likely constitute the user interface displayed when the extension icon is clicked. popup.js would handle the logic, while hello.html defines the structure and content.
-images/: Presumably contains icons or other graphical assets used by the extension.
-🔍 Potential Functionality
-Given the standard structure and naming, this extension might be designed to:
+# Web-to-Sheet Logger Chrome Extension
 
-Interact with Web Pages: Using content.js, the extension could modify or extract information from web pages.
-Provide a User Interface: Through hello.html and popup.js, users might interact with the extension, triggering certain actions or viewing information.
-Handle Background Processes: background.js could manage tasks that need to run continuously or respond to browser events.
-Without specific code or documentation, the exact functionality remains speculative.
+A Chrome extension that allows users to highlight text on any webpage and save it to a connected Google Sheet along with metadata.
 
-🛠️ Technical Stack
-Languages: JavaScript (65.2%), HTML (34.8%)
-Platform: Browser Extension (likely Chrome)
+## Day 1 Implementation
+
+### Files Created
+- `manifest.json`: Extension configuration using Manifest V3
+- `popup.html`: Basic extension popup interface
+- `popup.js`: Simple popup functionality
+- `content.js`: Basic content script that logs to console
+- `icons/web-to-sheet-logger-icon.png`: Extension icon
+
+### Permissions Used
+- `activeTab`: To access the current tab's content
+- `contextMenus`: For right-click context menu integration
+- `storage`: To store user preferences and connection status
+
+### How to Load the Extension
+
+1. Open Chrome and navigate to `chrome://extensions/`
+2. Enable "Developer mode" in the top right corner
+3. Click "Load unpacked" and select the extension directory
+4. The extension should now be loaded and visible in your Chrome toolbar
+
+### Testing the Extension
+
+1. Click the extension icon to see the popup
+2. Open any webpage
+3. Open the browser console (F12 or right-click -> Inspect -> Console)
+4. You should see the message: "Web-to-Sheet Logger content script loaded"
+
+### Current Features (Day 1)
+- Basic extension structure
+- Extension popup
+- Content script loading confirmation
+- Extension icon
+
+---
+
+## Day 2 Implementation
+
+### Features Added
+- Detects and captures **selected text only**
+- Shows a floating **"Save to Sheet"** button near the selected text
+- On click, logs selected text in the console
+- No metadata or sheet connection yet
+
+### Files Modified
+- `content.js`: Now detects text selection and logs the selected content
+
+### Testing Instructions
+
+1. Open any webpage
+2. Select some text
+3. A "Save to Sheet" button appears
+4. Click it and check the browser console for the selected text
+
+---
+
+## Day 3 Implementation
+
+### Features Added
+- **Metadata Collection:** Captures selected text, page title, page URL, and timestamp when saving.
+- **Preview Popup:** When you click "Save to Sheet," a confirmation popup appears showing all captured data for review before saving.
+- **Highlight Removal:** The text highlight is removed as soon as the preview popup appears, ensuring a clean user experience.
+- **Improved UX:** The floating button and popup are styled for clarity and usability. The button and popup disappear after saving or cancelling, and do not reappear unless new text is selected.
+
+### Files Modified
+- `content.js`: Now collects metadata, shows a preview popup, and removes highlight after selection.
+- `popup.html`: Improved instructions and status display.
+- `popup.js`: Handles status updates and connection checks.
+
+### Testing Instructions
+
+1. Open any webpage
+2. Select some text
+3. The "Save to Sheet" button appears near your selection
+4. Click the button to see a preview popup with all metadata
+5. Confirm or cancel; the popup and button will disappear, and the highlight will be removed
+
+---
+
+### Next Steps
+- Day 4: Google Apps Script integration
+- Day 5: Sheet connection
+- Day 6: Polish and edge cases
+- Day 7: Final demo and submission
